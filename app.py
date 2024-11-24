@@ -30,8 +30,8 @@ def extract_transcript_details(youtube_video_url):
         transcript_text = YouTubeTranscriptApi.get_transcript(video_id)
         return " ".join([i["text"] for i in transcript_text])
     except TranscriptsDisabled:
-        st.error("Transcripts are disabled for this video.")
-        return "Transcripts are disabled for this video."
+        st.error("Unable to fetch due to privacy guidelines of youtube.")
+        return "Unable to fetch due to privacy guidelines of youtube."
     except VideoUnavailable:
         st.error("The video is unavailable or invalid.")
         return "The video is unavailable or invalid."

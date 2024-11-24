@@ -84,7 +84,7 @@ if youtube_link:
 
                 if transcript_text and not transcript_text.startswith("An error occurred"):
                     # Attempt to use Google Gemini Pro
-                    if GOOGLE_API_KEY:
+                    if api_key:
                         summary = generate_gemini_content(transcript_text, PROMPT)
                         if "Error generating" in summary and OPENAI_API_KEY:
                             st.warning("Google Gemini Pro failed. Switching to OpenAI.")

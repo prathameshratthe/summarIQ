@@ -30,6 +30,12 @@ PROMPT = """Welcome, Video Summarizer! Your task is to distill the essence of a 
 Your summary should capture the key points and essential information, presented in bullet points, within a 250-word limit. 
 Let's dive into the provided transcript and extract the vital details for our audience."""
 
+# Function to validate YouTube URL
+def is_valid_youtube_url(url):
+    pattern = r"^https?://(www\.)?youtube\.com/watch\?v=.+$"
+    print(f"[DEBUG] Validating YouTube URL: {url}")
+    return re.match(pattern, url) is not None
+
 # Function to download audio using yt-dlp
 def download_audio_yt_dlp(youtube_url):
     try:
@@ -52,26 +58,31 @@ def download_audio_yt_dlp(youtube_url):
         print(f"[ERROR] yt-dlp audio download failed: {e}")
         return None
 
-# Function to validate YouTube URL
-def is_valid_youtube_url(url):
-    pattern = r"^https?://(www\.)?youtube\.com/watch\?v=.+$"
-    print(f"[DEBUG] Validating YouTube URL: {url}")
-    return re.match(pattern, url) is not None
-
-# Function to extract transcript details
-def extract_transcript_details(youtube_video_url):
+# Function to extract transcript or fallback to audio transcription
+def get_video_transcript_or_transcribe(youtube_video_url):
     try:
+        # Attempt to fetch the transcript using YouTubeTranscriptApi
         video_id = youtube_video_url.split("v=")[1]
-        print(f"[DEBUG] Extracting transcript for video ID: {video_id}")
+        print(f"[DEBUG] Attempting to fetch transcript for video ID: {video_id}")
         transcript = YouTubeTranscriptApi.get_transcript(video_id)
-        return " ".join([entry["text"] for entry in transcript])
+        transcript_text = " ".join([entry["text"] for entry in transcript])
+        print("[INFO] Successfully fetched transcript from YouTube.")
+        return transcript_text
     except TranscriptsDisabled:
-        return "Transcripts are disabled for this video."
+        print("[WARNING] Transcripts are disabled for this video. Falling back to audio transcription.")
     except VideoUnavailable:
-        return "The video is unavailable or invalid."
+        print("[ERROR] The video is unavailable or invalid. Falling back to audio transcription.")
     except Exception as e:
-        print(f"[ERROR] Error extracting transcript: {e}")
-        return f"An error occurred: {e}"
+        print(f"[ERROR] Error fetching transcript: {e}. Falling back to audio transcription.")
+
+    # If transcript fetching fails, fallback to audio download and transcription
+    print("[DEBUG] Proceeding with audio extraction and transcription...")
+    audio_file = download_audio_yt_dlp(youtube_video_url)
+    if audio_file:
+        return transcribe_audio(audio_file)
+    else:
+        print("[ERROR] Failed to download audio. Unable to proceed with transcription.")
+        return None
 
 # Function to generate summary using Google Gemini Pro
 def generate_gemini_content(transcript_text, prompt):
@@ -87,7 +98,6 @@ def generate_gemini_content(transcript_text, prompt):
         print(f"[ERROR] Error generating summary with Gemini Pro: {e}")
         return f"Error generating summary: {e}"
 
-# Function to transcribe audio to text using Google Cloud Speech-to-Text
 # Function to transcribe audio to text using Google Cloud Speech-to-Text V2
 def transcribe_audio(audio_path):
     try:
@@ -106,7 +116,7 @@ def transcribe_audio(audio_path):
         config = cloud_speech.RecognitionConfig(
             auto_decoding_config=cloud_speech.AutoDetectDecodingConfig(),
             language_codes=["en-US"],
-            model="short",  # Use "short" for short audio files
+            model="short",
         )
 
         # Replace PROJECT_ID with your actual Google Cloud project ID
@@ -132,15 +142,15 @@ def transcribe_audio(audio_path):
         print("[DEBUG] Falling back to offline transcription...")
         return offline_transcription(audio_path)
 
+# Offline transcription using vosk
 def transcribe_with_vosk(audio_path):
     try:
         print("[DEBUG] Starting offline transcription using Vosk...")
-        model = Model("model")  # Replace "model" with the path to your Vosk model
+        model = Model("model")
         wf = wave.open(audio_path, "rb")
 
         if wf.getnchannels() != 1 or wf.getsampwidth() != 2 or wf.getframerate() not in (8000, 16000):
             print("[DEBUG] Converting audio to Vosk-compatible format...")
-            # Convert audio to Vosk-compatible format
             converted_audio_path = "converted_audio.wav"
             ffmpeg.input(audio_path).output(converted_audio_path, ar=16000, ac=1).run()
             wf = wave.open(converted_audio_path, "rb")
@@ -160,7 +170,7 @@ def transcribe_with_vosk(audio_path):
         print(f"[ERROR] Vosk transcription failed: {e}")
         return None
 
-# Offline transcription using whisper
+# Offline transcription using Whisper
 def transcribe_with_whisper(audio_path):
     try:
         print("[DEBUG] Starting offline transcription using Whisper...")
@@ -174,16 +184,12 @@ def transcribe_with_whisper(audio_path):
 
 # Unified offline transcription function
 def offline_transcription(audio_path):
-    # Try Vosk first
     vosk_transcript = transcribe_with_vosk(audio_path)
     if vosk_transcript:
         return vosk_transcript
-
-    # If Vosk fails, try Whisper
     whisper_transcript = transcribe_with_whisper(audio_path)
     if whisper_transcript:
         return whisper_transcript
-
     return "Offline transcription failed."
 
 # Streamlit UI
@@ -197,17 +203,12 @@ if youtube_link:
 
         if st.button("Get Detailed Notes"):
             with st.spinner("Processing..."):
-                audio_file = download_audio_yt_dlp(youtube_link)
-
-                if audio_file:
-                    transcript_text = transcribe_audio(audio_file)
-                    if transcript_text:
-                        summary = generate_gemini_content(transcript_text, PROMPT)
-                        st.markdown("### Summary:")
-                        st.write(summary)
-                    else:
-                        st.error("Audio transcription failed.")
+                transcript_text = get_video_transcript_or_transcribe(youtube_link)
+                if transcript_text:
+                    summary = generate_gemini_content(transcript_text, PROMPT)
+                    st.markdown("### Summary:")
+                    st.write(summary)
                 else:
-                    st.error("Failed to extract audio from the video.")
+                    st.error("Failed to generate summary. Unable to fetch or transcribe content.")
     else:
         st.error("Please enter a valid YouTube video URL.")

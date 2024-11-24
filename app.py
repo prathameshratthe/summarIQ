@@ -27,13 +27,18 @@ def is_valid_youtube_url(url):
 def extract_transcript_details(youtube_video_url):
     try:
         video_id = youtube_video_url.split("=")[1]
+        st.write(f"Extracting transcript for video ID: {video_id}")
         transcript_text = YouTubeTranscriptApi.get_transcript(video_id)
+        st.write("Transcript extraction successful.")
         return " ".join([i["text"] for i in transcript_text])
     except TranscriptsDisabled:
+        st.error("Transcripts are disabled for this video.")
         return "Transcripts are disabled for this video."
     except VideoUnavailable:
+        st.error("The video is unavailable or invalid.")
         return "The video is unavailable or invalid."
     except Exception as e:
+        st.error(f"Error during transcript extraction: {str(e)}")
         return f"An error occurred: {str(e)}"
 
 # Function to generate summary using Google Gemini Pro

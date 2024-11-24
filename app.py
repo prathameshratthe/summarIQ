@@ -10,8 +10,8 @@ import openai
 load_dotenv()
 
 # Configure APIs
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GOOGLE_API_KEY = "AIzaSyAezWm8g0itJwNEBJVrs-ix_rXYJ0Ej-Kk"
+OPENAI_API_KEY = "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"
 
 # Summarization prompt
 PROMPT = """Welcome, Video Summarizer! Your task is to distill the essence of a given YouTube video transcript into a concise summary. 

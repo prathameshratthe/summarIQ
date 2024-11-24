@@ -40,13 +40,14 @@ def extract_transcript_details(youtube_video_url):
 def generate_gemini_content(transcript_text, prompt):
     try:
         import google.generativeai as genai
-        genai.configure(api_key=GOOGLE_API_KEY)
+        genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-        response = genai.generate(
-            model="text-bison-001",  # Update based on available model
+        # Correct method for generating text
+        response = genai.generate_text(
+            model="text-bison-001",
             prompt=prompt + "\n" + transcript_text,
         )
-        return response.generations[0]["text"]
+        return response.candidates[0]["output"]
     except Exception as e:
         return f"Error generating summary with Gemini Pro: {str(e)}"
 

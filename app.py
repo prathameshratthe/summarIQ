@@ -60,7 +60,7 @@ def generate_gemini_content(transcript_text, prompt):
         return f"Error generating summary with Gemini Pro: {str(e)}"
 
 # Streamlit UI
-st.title("Gemini YouTube Transcript Summarizer: Extract Key Insights from YouTube Videos")
+st.title("SummarIQ: AI-Driven Video Summaries and Fact-Checking")
 youtube_link = st.text_input("Enter YouTube Video Link:")
 
 if youtube_link:
@@ -82,7 +82,7 @@ if youtube_link:
                         st.error(summary)
 
                     # Display summary
-                    st.markdown("## Detailed Notes:")
+                    st.markdown("## Fact Check:")
                     st.write(summary)
                 else:
                     st.error(transcript_text)

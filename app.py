@@ -11,7 +11,8 @@ import google.generativeai as genai
 load_dotenv()
 
 # Configure APIs
-genai.configure(api_key="AIzaSyDe1-tmszp0nrSRs_Thp0b9IRrp_ni4NLQ")
+api_key="AIzaSyDe1-tmszp0nrSRs_Thp0b9IRrp_ni4NLQ"
+genai.configure(api_key=api_key)
 
 # Summarization prompt
 PROMPT = """Welcome, Video Summarizer! Your task is to distill the essence of a given YouTube video transcript into a concise summary. 

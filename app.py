@@ -4,13 +4,16 @@ import streamlit as st
 from dotenv import load_dotenv
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled, VideoUnavailable
-import google.generativeai as genai
+
+# Optional: Import OpenAI for fallback
+import openai
 
 # Load environment variables
 load_dotenv()
 
-# Configure Google GenerativeAI
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+# Configure APIs
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Summarization prompt
 PROMPT = """Welcome, Video Summarizer! Your task is to distill the essence of a given YouTube video transcript into a concise summary. 
@@ -38,13 +41,27 @@ def extract_transcript_details(youtube_video_url):
 # Function to generate summary using Google Gemini Pro
 def generate_gemini_content(transcript_text, prompt):
     try:
-        response = genai.generate_text(
-            model="gemini-pro", 
+        import google.generativeai as genai
+        genai.configure(api_key=GOOGLE_API_KEY)
+        response = genai.generate_content(
+            model="gemini-pro",
             prompt=prompt + "\n" + transcript_text,
         )
         return response.generations[0].text
     except Exception as e:
-        return f"Error generating summary: {str(e)}"
+        return f"Error generating summary with Gemini Pro: {str(e)}"
+
+# Function to generate summary using OpenAI GPT (fallback)
+def generate_summary_with_openai(transcript_text, prompt):
+    try:
+        openai.api_key = OPENAI_API_KEY
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt + "\n" + transcript_text}],
+        )
+        return response["choices"][0]["message"]["content"]
+    except Exception as e:
+        return f"Error generating summary with OpenAI: {str(e)}"
 
 # Streamlit UI
 st.title("Gemini YouTube Transcript Summarizer: Extract Key Insights from YouTube Videos")
@@ -57,13 +74,26 @@ if youtube_link:
 
         if st.button("Get Detailed Notes"):
             with st.spinner("Processing..."):
+                # Extract transcript
                 transcript_text = extract_transcript_details(youtube_link)
 
-                if transcript_text:
-                    summary = generate_gemini_content(transcript_text, PROMPT)
+                if transcript_text and not transcript_text.startswith("An error occurred"):
+                    # Attempt to use Google Gemini Pro
+                    if GOOGLE_API_KEY:
+                        summary = generate_gemini_content(transcript_text, PROMPT)
+                        if "Error generating" in summary and OPENAI_API_KEY:
+                            st.warning("Google Gemini Pro failed. Switching to OpenAI.")
+                            summary = generate_summary_with_openai(transcript_text, PROMPT)
+                    # Use OpenAI directly if no Google API key
+                    elif OPENAI_API_KEY:
+                        summary = generate_summary_with_openai(transcript_text, PROMPT)
+                    else:
+                        summary = "No valid API keys configured. Please check your environment variables."
+
+                    # Display summary
                     st.markdown("## Detailed Notes:")
                     st.write(summary)
                 else:
-                    st.error("Failed to extract transcript.")
+                    st.error(transcript_text)
     else:
         st.error("Please enter a valid YouTube video URL.")

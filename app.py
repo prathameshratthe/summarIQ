@@ -4,8 +4,6 @@ import streamlit as st
 from dotenv import load_dotenv
 from youtube_transcript_api import YouTubeTranscriptApi
 from youtube_transcript_api._errors import TranscriptsDisabled, VideoUnavailable
-
-# Optional: Import OpenAI for fallback
 import openai
 
 # Load environment variables
@@ -43,11 +41,12 @@ def generate_gemini_content(transcript_text, prompt):
     try:
         import google.generativeai as genai
         genai.configure(api_key=GOOGLE_API_KEY)
-        response = genai.generate_content(
-            model="gemini-pro",
+
+        response = genai.generate(
+            model="text-bison-001",  # Update based on available model
             prompt=prompt + "\n" + transcript_text,
         )
-        return response.generations[0].text
+        return response.generations[0]["text"]
     except Exception as e:
         return f"Error generating summary with Gemini Pro: {str(e)}"
 

@@ -3,4 +3,4 @@ streamlit
 google_generativeai
 python_dotenv
 pathlib
-openai
+openai==0.28.0

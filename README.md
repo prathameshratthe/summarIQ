@@ -36,10 +36,4 @@ To run the application locally, follow these steps:
 - `python_dotenv`: Library for loading environment variables from `.env` files.
 - `pathlib`: Library for handling file paths in an object-oriented way.
 
-## Contributing
 
-Contributions are welcome! Feel free to open an issue or submit a pull request with any improvements or bug fixes.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).

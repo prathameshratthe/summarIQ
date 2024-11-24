@@ -1,4 +1,4 @@
-# SummarIQ
+# SummarIQ - AI-Driven Video Summaries and Fact-Checking
 
 **SummarIQ** is a Python-based application that leverages advanced AI models like Google’s Gemini Pro to automatically generate concise, high-quality summaries of YouTube videos. Built with Streamlit, it offers a user-friendly interface where users can input video links and instantly access detailed, insightful summaries. The tool simplifies content consumption, providing quick and actionable insights from video material in a highly efficient manner.
 
@@ -16,7 +16,7 @@
 
 ## Screenshot
 
-![SummarIQ](images/SummarIQ.png)
+![SummarIQ - AI-Driven Video Summaries and Fact-Checking](images/SummarIQ.png)
 
 ## Getting Started
 

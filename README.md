@@ -1,6 +1,6 @@
-# Gemini YouTube Transcript Summarizer
+# SummarIQ
 
-Gemini YouTube Transcript Summarizer is a Python-based application that utilizes the YouTube Transcript API for transcript extraction and Google's Gemini Pro GenerativeAI for automatic summarization. This Streamlit app allows users to input YouTube video links and receive detailed summaries, enhancing accessibility and efficiency in accessing video content insights.
+SummarIQ is a Python-based application that utilizes the YouTube Transcript API for transcript extraction and Google's Gemini Pro GenerativeAI for automatic summarization. This Streamlit app allows users to input YouTube video links and receive detailed summaries, enhancing accessibility and efficiency in accessing video content insights.
 
 ## Features
 
@@ -11,7 +11,7 @@ Gemini YouTube Transcript Summarizer is a Python-based application that utilizes
 
 ## Screenshot
 
-![Gemini YouTube Transcript Summarizer](images/YTGeminiSummarizer.png)
+![Gemini YouTube Transcript Summarizer](images/SummarIQ.png)
 
 ## Getting Started
 

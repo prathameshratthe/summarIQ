@@ -4,3 +4,9 @@ google_generativeai
 python_dotenv
 pathlib
 openai==0.28.0
+google-cloud-speech
+ffmpeg
+pytube
+yt_dlp
+vosk
+whisper

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "summariq",
+  "private_key_id": "42ed106edf2ad843a7efafd9657d4816da0ddb11",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC+OVUrU5JIBxe7\nPvpT9TrU+5vj6NrHzEABM4LdcUSNktgna6akFl8pZR7sgbKxf8fTigCdrkbWusu6\nQgCYoF8aFDuaSa5AcqA5wQWfpo9fsBmzVgdf9pCQV81LDsb++nbiPB7gMAX8kDh6\nG6RQ8LQKWrdYpZGlys5lRQrCLyCFM0gHu5e9COZHivlTHSgb2iHmKpZ2HPFTcBIW\nP3262+GE6lYzm+QAe/Kje/qWu6T5Iy12p5IV/NLP+N9ZJKGrCFdV9+CXGAXV5yDK\nEs2b+HLAuyXfo0qTvPXKv51ciimnb4/CdvBI929yP4MPbbZx2CeS8dOAEe5iYZ98\n/HR6DUvjAgMBAAECggEAAITh3XKRbsk3gIciohGvEuoK2gYxI/luipz23vQnq+aP\ng3AGQ41cvh1XW8LbgiN8n/BQ9x0vdqI02xxsqaiftHpYp/T1LkTXI2vflY4b9wwL\nzehOsILY5c6aMfm82PDwW8aujjhjU8tFntkDdkW/NVtbrmNpRdVgrHhnQpy5TykR\nntHMGhJRNj6w20eJKjiwEOTiXTbG8bBaP5sJuIWBHs/D7OXAe9vHAnOkw8hbZZIE\nkhq8aiXrZeNd63LJiIZXCZlaaHcxOqyucEeDhVMCTCZ2Ghk7SkZCCgjuYm7zCUAO\nO3lyMnaYMyXA6MxTvRE9OTezy1nh86MthSOBeaoG1QKBgQDxwMIBGEbiNUzeW6uH\nKLpX3xDQcDDXjAeEZsRZDIJ/w0rl4dyjw0rV45z3oN+NJfqY7KbuZ2BsLpTvZvGI\ndultNwxv5f7fo4GMHJh+0lmiP7lKKV2m9U32cp5XRfJonUoW1xR9iNLgkEct+fdk\nHJ2MENEhnB1tpUNOmLDQFKy3dwKBgQDJbyzCA9R1Tzh5As+10L2O+wERg3QbBUEJ\nzwqKtalXwr2jYbeMMGleRUIw37xX3n6BwSdDOL/iQNyyat15JQhmCGkp2nfTmVqu\nvUrgjiuknYFgwXwyC2W4iv2aBl5MkFZoLPprPuPoPl5dXDi27Xohp3PxhAeiHJre\nomjTJ1fB9QKBgQC1H7L6eQLahg6CZfH8QKJkJWcGk5e0VmBnbUtcYEgBiwK5euAA\n/dc6qt62lJwIt1SqcFudMGyIgNnrB5icomK/BchWqd2sFmd/3wjNs7GeItoi2x0k\ncpMnurYxMuGsSXPx6tCaQQGlZ9M8ehREuD+9afgVk05lELV91F5cd7DzfwKBgGd8\nIy1llE/ULDoXFKjenZQIJeteclazY09ru4m5fE9m79AxEoAGGwvgXvoG55bo6ms0\n1Tv2urW9BuTue+uR9/ebWJO09hySS4E8JGyq/YbrmB0iKfD35AFj/peTr/x7priM\navaP77xP1mD2UPjBlh4WDj3Ey7sgIPxBycK5Ep/FAoGABWrtQKZZiyi3h18N6PQ6\nJcS7eTbyhDhqbF5l8UTuLvBGuILHcAItE+/Y0Isp2rGoG+uIl6Sa3hM2S0shGSIW\n9q05clj42w+x8qvobIS8x6muXeCDIkTod6jwv7SjNpRiTis/dojfvvCptxPgnIpq\nhth3k3mCUNeq4d9UU3jnQ9E=\n-----END PRIVATE KEY-----\n",
+  "client_email": "summariq@summariq.iam.gserviceaccount.com",
+  "client_id": "102401494543924954175",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/summariq%40summariq.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

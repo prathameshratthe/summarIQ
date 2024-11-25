@@ -1,40 +1,47 @@
-# Gemini YouTube Transcript Summarizer
+### SummarIQ - AI-based Summarization and Fact-Checking for the Given Input
 
-Gemini YouTube Transcript Summarizer is a Python-based application that utilizes the YouTube Transcript API for transcript extraction and Google's Gemini Pro GenerativeAI for automatic summarization. This Streamlit app allows users to input YouTube video links and receive detailed summaries, enhancing accessibility and efficiency in accessing video content insights.
+SummarIQ is a Python-based application designed to provide automatic summarization and fact-checking for any given input. Leveraging the power of the YouTube Transcript API and Google's Gemini Pro GenerativeAI, this Streamlit app allows users to input YouTube video links and receive concise, fact-checked summaries, enhancing accessibility and efficiency in understanding content.
 
 ## Features
-
-- Extracts transcripts from YouTube videos.
-- Summarizes transcripts into concise summaries using Google's Gemini Pro GenerativeAI.
-- Provides detailed notes with key insights and essential information.
-- User-friendly interface with easy input of YouTube video links.
+Extracts transcripts directly from YouTube videos.
+Summarizes transcripts into concise and actionable insights using Google's Gemini Pro GenerativeAI.
+Performs fact-checking on the summarized content to ensure reliability and accuracy.
+User-friendly interface with straightforward input of YouTube video links.
+Screenshot
 
 ## Screenshot
 
-![Gemini YouTube Transcript Summarizer](images/YTGeminiSummarizer.png)
+![SummarIQ - AI based Summarization and Fact Checking](images/SummarIQ.png)
+
 
 ## Getting Started
 
 To run the application locally, follow these steps:
 
-1. Clone this repository to your local machine.
-2. Install the required Python dependencies listed in `requirements.txt` using `pip install -r requirements.txt`.
-3. Set up your Google API key by creating a `.env` file in the root directory and adding your key:
-4. Run the Streamlit app by executing the command `streamlit run app.py` in your terminal.
-5. Access the Streamlit app in your web browser at `http://localhost:8501`.
+Clone this repository to your local machine.
+Install the required Python dependencies listed in requirements.txt using the command:
+bash
+Copy code
+pip install -r requirements.txt
+Set up your Google API key by creating a .env file in the root directory and adding your key:
+bash
+Copy code
+GOOGLE_API_KEY=your_api_key_here
+Run the Streamlit app using the command:
+bash
+Copy code
+streamlit run app.py
+Access the application in your web browser at http://localhost:8501.
 
 ## Dependencies
 
-- `youtube_transcript_api`: Library for fetching transcripts from YouTube videos.
-- `streamlit`: Framework for building interactive web applications with Python.
-- `google_generativeai`: Library for accessing Google's Gemini Pro GenerativeAI.
-- `python_dotenv`: Library for loading environment variables from `.env` files.
-- `pathlib`: Library for handling file paths in an object-oriented way.
+youtube_transcript_api: Fetches transcripts from YouTube videos.
+streamlit: Framework for creating interactive web applications.
+google_generativeai: Provides integration with Google's Gemini Pro GenerativeAI for summarization and fact-checking.
+python_dotenv: Loads environment variables securely from .env files.
+pathlib: Facilitates object-oriented handling of file paths.
 
 ## Contributing
 
-Contributions are welcome! Feel free to open an issue or submit a pull request with any improvements or bug fixes.
+We welcome contributions! If you have ideas, improvements, or fixes, feel free to open an issue or submit a pull request.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).

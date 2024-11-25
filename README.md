@@ -1,4 +1,4 @@
-### SummarIQ - AI-based Summarization and Fact-Checking for the Given Input
+### SummarIQ - AI-based Summarization and Fact-Checking.
 
 SummarIQ is a Python-based application designed to provide automatic summarization and fact-checking for any given input. Leveraging the power of the YouTube Transcript API and Google's Gemini Pro GenerativeAI, this Streamlit app allows users to input YouTube video links and receive concise, fact-checked summaries, enhancing accessibility and efficiency in understanding content.
 

@@ -19,18 +19,31 @@ Screenshot
 To run the application locally, follow these steps:
 
 Clone this repository to your local machine.
+
 Install the required Python dependencies listed in requirements.txt using the command:
+
 bash
+
 Copy code
+
 pip install -r requirements.txt
+
 Set up your Google API key by creating a .env file in the root directory and adding your key:
+
 bash
+
 Copy code
+
 GOOGLE_API_KEY=your_api_key_here
+
 Run the Streamlit app using the command:
+
 bash
+
 Copy code
+
 streamlit run app.py
+
 Access the application in your web browser at http://localhost:8501.
 
 ## Dependencies

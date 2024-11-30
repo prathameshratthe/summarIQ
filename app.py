@@ -193,7 +193,7 @@ def offline_transcription(audio_path):
     return "Offline transcription failed."
 
 # Streamlit UI
-st.title("VedantIQ: AI-Driven Video Summaries and Fact-Checking")
+st.title("summarIQ: AI-Driven Video Summaries and Fact-Checking")
 youtube_link = st.text_input("Enter YouTube Video Link:")
 
 if youtube_link:
